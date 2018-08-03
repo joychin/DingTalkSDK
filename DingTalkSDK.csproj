@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Version>0.9.0</Version>
+    <Description>钉钉的服务端SDK</Description>
+    <PackageProjectUrl>https://github.com/joychin/DingDingSDK</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/joychin/DingDingSDK</RepositoryUrl>
+    <RepositoryType>Github</RepositoryType>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/joychin/DingDingSDK/master/LICENSE</PackageLicenseUrl>
+    <Copyright>https://raw.githubusercontent.com/joychin/DingDingSDK/master/LICENSE</Copyright>
+    <Company />
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.7.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>
