@@ -23,6 +23,21 @@ namespace DingTalkSDK
         /// 企业应用的凭证密钥
         /// </summary>
         public static string CorpSecret { get; set; }
+        /// <summary>
+        /// Token 更新日期
+        /// </summary>
+        private static DateTime Accesson_token_UpdateTime
+        {
+            get
+            {
+                if (Accesson_token_UpdateTime == null)
+                {
+                    return DateTime.MinValue;
+                }
+                return Accesson_token_UpdateTime;
+            }
+            set => Accesson_token_UpdateTime = value;
+        }
 
         /// <summary>
         /// Access_Token
@@ -31,9 +46,23 @@ namespace DingTalkSDK
         {
             get
             {
-               return AuthHelper.getAccessToken();
+                //钉钉规定7200秒过期，这里我们用6900秒过期
+
+                if (
+                    Accesson_token_UpdateTime == DateTime.MinValue
+                    || Accesson_token_UpdateTime == null
+                    || (DateTime.Now - Accesson_token_UpdateTime).TotalSeconds > 6900
+                    )
+                {
+                    return AuthHelper.getAccessToken();
+                }
+                else
+                {
+                    return Access_token;
+                }
             }
             set => Access_token = value;
         }
+
     }
 }
