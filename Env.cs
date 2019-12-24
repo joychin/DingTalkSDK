@@ -28,15 +28,7 @@ namespace DingTalkSDK
         /// </summary>
         private static DateTime Accesson_token_UpdateTime
         {
-            get
-            {
-                if (Accesson_token_UpdateTime == null)
-                {
-                    return DateTime.MinValue;
-                }
-                return Accesson_token_UpdateTime;
-            }
-            set => Accesson_token_UpdateTime = value;
+            get;set;
         }
 
         /// <summary>
