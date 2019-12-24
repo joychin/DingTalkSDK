@@ -12,12 +12,12 @@ namespace DingTalkSDK
     /// </summary>
     public class Env
     {
-        public const String OAPI_HOST = "https://oapi.dingtalk.com";
+        public const string OAPI_HOST = "https://oapi.dingtalk.com";
 
         /// <summary>
         /// 企业Id
         /// </summary>
-        public static String CorpId { get; set; }
+        public static string CorpId { get; set; }
 
         /// <summary>
         /// 企业应用的凭证密钥
@@ -31,17 +31,9 @@ namespace DingTalkSDK
         {
             get
             {
-                if (Access_token == null)
-                {
-                    return AuthHelper.getAccessToken();
-                }
-                else
-                {
-                    return Access_token;
-                }
+               return AuthHelper.getAccessToken();
             }
             set => Access_token = value;
-
         }
     }
 }
