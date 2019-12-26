@@ -46,7 +46,9 @@ namespace DingTalkSDK
                     || (DateTime.Now - Accesson_token_UpdateTime).TotalSeconds > 6900
                     )
                 {
-                    return AuthHelper.getAccessToken();
+                    var accessonToken = AuthHelper.getAccessToken();
+                    Env.Accesson_token_UpdateTime = DateTime.Now;
+                    return accessonToken;
                 }
                 else
                 {
