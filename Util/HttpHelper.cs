@@ -82,5 +82,21 @@ namespace DingTalkSDK.Util
             var respostData = await client.UploadDataTaskAsync(url, postdata);
             return BsonDocument.Parse(System.Text.UTF8Encoding.UTF8.GetString(respostData));
         }
+        /// <summary>
+        /// 检查请求是否执行成功
+        /// </summary>
+        /// <param name="response"></param>
+        /// <returns></returns>
+        public static bool CheckResponseOk(BsonDocument response)
+        {
+            if (response.Contains("errcode") && response["errcode"].ToInt64() == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

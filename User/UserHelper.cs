@@ -58,7 +58,7 @@ namespace DingTalkSDK.User
 
             BsonDocument response = HttpHelper.httpPost(url, args);
 
-            if (response.Contains("userid"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["userid"].ToString();
             }
@@ -114,7 +114,7 @@ namespace DingTalkSDK.User
             args["department"] = deptlist;
 
             var response = await HttpHelper.httpPostAsync(url, args);
-            if (response.Contains("userid"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["userid"].ToString();
             }
@@ -158,7 +158,7 @@ namespace DingTalkSDK.User
 
             BsonDocument response = HttpHelper.httpPost(url, args);
 
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -198,7 +198,7 @@ namespace DingTalkSDK.User
 
             BsonDocument response = await HttpHelper.httpPostAsync(url, args);
 
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -224,7 +224,7 @@ namespace DingTalkSDK.User
                 "access_token=" + accessToken + "&userid=" + userid;
             BsonDocument response = HttpHelper.httpGet(url);
 
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -250,7 +250,7 @@ namespace DingTalkSDK.User
                 "access_token=" + accessToken + "&userid=" + userid;
             BsonDocument response = await HttpHelper.httpGetAsync(url);
 
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -320,7 +320,7 @@ namespace DingTalkSDK.User
             BsonDocument args = new BsonDocument();
             args["useridlist"] = new BsonArray(useridlist);
             BsonDocument response = HttpHelper.httpPost(url, args);
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -348,7 +348,7 @@ namespace DingTalkSDK.User
             BsonDocument args = new BsonDocument();
             args["useridlist"] = new BsonArray(useridlist);
             BsonDocument response = await HttpHelper.httpPostAsync(url, args);
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -369,7 +369,7 @@ namespace DingTalkSDK.User
             String url = Env.OAPI_HOST + "/user/simplelist?" +
                     "access_token=" + accessToken + "&department_id=" + department_id;
             BsonDocument response = HttpHelper.httpGet(url);
-            if (response.Contains("userlist"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 List<User> list = new List<User>();
                 BsonArray arr = response["userlist"].AsBsonArray;
@@ -400,7 +400,7 @@ namespace DingTalkSDK.User
             String url = Env.OAPI_HOST + "/user/simplelist?" +
                     "access_token=" + accessToken + "&department_id=" + department_id;
             BsonDocument response = await HttpHelper.httpGetAsync(url);
-            if (response.Contains("userlist"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 List<User> list = new List<User>();
                 BsonArray arr = response["userlist"].AsBsonArray;
@@ -431,7 +431,7 @@ namespace DingTalkSDK.User
             String url = Env.OAPI_HOST + "/user/list?" +
                         "access_token=" + accessToken + "&department_id=" + department_id;
             BsonDocument response = HttpHelper.httpGet(url);
-            if (response.Contains("userlist"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 BsonArray arr = response["userlist"].AsBsonArray;
                 List<User> list = new List<User>();
@@ -466,7 +466,7 @@ namespace DingTalkSDK.User
             String url = Env.OAPI_HOST + "/user/list?" +
                         "access_token=" + accessToken + "&department_id=" + department_id;
             BsonDocument response = await HttpHelper.httpGetAsync(url);
-            if (response.Contains("userlist"))
+            if (rHttpHelper.CheckResponseOk(response))
             {
                 BsonArray arr = response["userlist"].AsBsonArray;
                 List<User> list = new List<User>();

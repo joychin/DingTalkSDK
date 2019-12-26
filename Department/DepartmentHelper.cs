@@ -70,7 +70,7 @@ namespace DingTalkSDK.Department
             #endregion
 
             BsonDocument response = HttpHelper.httpPost(url, args);
-            if (response.Contains("id"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["id"].ToInt64();
             }
@@ -140,7 +140,7 @@ namespace DingTalkSDK.Department
             #endregion
 
             BsonDocument response = await HttpHelper.httpPostAsync(url, args);
-            if (response.Contains("id"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["id"].ToInt64();
             }
@@ -163,7 +163,7 @@ namespace DingTalkSDK.Department
             String url = Env.OAPI_HOST + "/department/list?" +
                 "access_token=" + accessToken;
             BsonDocument response = HttpHelper.httpGet(url);
-            if (response.Contains("department"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 BsonArray arr = response["department"].AsBsonArray;
                 List<Department> list = new List<Department>();
@@ -193,7 +193,7 @@ namespace DingTalkSDK.Department
             String url = Env.OAPI_HOST + "/department/list?" +
                 "access_token=" + accessToken;
             BsonDocument response = await HttpHelper.httpGetAsync(url);
-            if (response.Contains("department"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 BsonArray arr = response["department"].AsBsonArray;
                 List<Department> list = new List<Department>();
@@ -223,7 +223,7 @@ namespace DingTalkSDK.Department
             String url = Env.OAPI_HOST + "/department/delete?" +
                         "access_token=" + accessToken + "&id=" + id;
             BsonDocument response = HttpHelper.httpGet(url);
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -244,7 +244,7 @@ namespace DingTalkSDK.Department
             String url = Env.OAPI_HOST + "/department/delete?" +
                         "access_token=" + accessToken + "&id=" + id;
             BsonDocument response = await HttpHelper.httpGetAsync(url);
-            if (response.Contains("errcode") && response["errcode"].AsInt32 != 0)
+            if (!HttpHelper.CheckResponseOk(response))
             {
                 throw new DingDingApiResultException(response["errcode"].AsInt32, response["errmsg"].AsString);
             }
@@ -297,7 +297,7 @@ namespace DingTalkSDK.Department
             }
             #endregion
             BsonDocument response = HttpHelper.httpPost(url, args);
-            if (response.Contains("id"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["id"].ToInt64();
             }
@@ -353,7 +353,7 @@ namespace DingTalkSDK.Department
             }
             #endregion
             BsonDocument response = await HttpHelper.httpPostAsync(url, args);
-            if (response.Contains("id"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["id"].ToInt64();
             }
@@ -384,7 +384,7 @@ namespace DingTalkSDK.Department
             args["access_token"] = "accessToken";
             args["onlyActive"] = onlyActive;
             var response = HttpHelper.httpGet(url, args);
-            if (response.Contains("count"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["count"].ToInt64();
             }
@@ -415,7 +415,7 @@ namespace DingTalkSDK.Department
             args["access_token"] = "accessToken";
             args["onlyActive"] = onlyActive;
             var response = await HttpHelper.httpGetAsync(url, args);
-            if (response.Contains("count"))
+            if (HttpHelper.CheckResponseOk(response))
             {
                 return response["count"].ToInt64();
             }
