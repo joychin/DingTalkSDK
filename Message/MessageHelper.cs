@@ -21,7 +21,8 @@ namespace DingTalkSDK.Message
         /// <param name="msg">消息内容，消息类型和样例参考“消息类型与数据格式”。最长不超过2048个字节</param>
         /// <param name="userid_list">接收者的用户userid列表，最大列表长度：100</param>
         /// <param name="dept_id_list">接收者的部门id列表，最大列表长度：20,  接收者是部门id下(包括子部门下)的所有用户</param>
-        public static SendCorpconversation(String accessToken, string agent_id,Boolean to_all_user, IMessage msg,string userid_list,string dept_id_list)
+        /// <returns>消息task_id</returns>
+        public static string SendCorpconversation(String accessToken, string agent_id,Boolean to_all_user, IMessage msg,string userid_list,string dept_id_list)
         {
             if (String.IsNullOrWhiteSpace(accessToken))
             {
@@ -43,9 +44,9 @@ namespace DingTalkSDK.Message
             args["msg"] = msg;
             #endregion
             BsonDocument response = HttpHelper.httpPost(url, args);
-            if (response.Contains("errcode"))
+            if (HttpHelper.CheckResponseOk(response))
             {
-                return response["id"].ToInt64();
+                return response["task_id"].ToString();
             }
             else
             {
